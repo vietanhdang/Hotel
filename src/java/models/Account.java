@@ -14,12 +14,12 @@ public class Account {
     private int accountId;
     private String name;
     private String password;
-    private boolean role;
+    private int role;
 
     public Account() {
     }
 
-    public Account(int accountId, String name, String password, boolean role) {
+    public Account(int accountId, String name, String password, int role) {
         this.accountId = accountId;
         this.name = name;
         this.password = password;
@@ -50,11 +50,11 @@ public class Account {
         this.password = password;
     }
 
-    public boolean isRole() {
+    public int getRole() {
         return role;
     }
 
-    public void setRole(boolean role) {
+    public void setRole(int role) {
         this.role = role;
     }
 

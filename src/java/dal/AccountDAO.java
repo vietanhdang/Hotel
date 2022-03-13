@@ -26,7 +26,7 @@ public class AccountDAO extends DBContext {
             stm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             stm.setString(1, account.getName());
             stm.setString(2, account.getPassword());
-            stm.setBoolean(3, account.isRole());
+            stm.setInt(3, account.getRole());
             return stm.executeUpdate();
         } catch (SQLException e) {
             System.out.println("register account error in DAO");
@@ -34,13 +34,29 @@ public class AccountDAO extends DBContext {
         return 0;
     }
 
-    public Account getAccountByName(Account account) {
+    public Account getAccount(Account account) {
         try {
-            String sql = "select a.accountID, a.name, a.password, a.roleID from Account a";
+            String sql = "select a.accountID, a.name, a.password, a.roleID from Account a where a.name = ? and a.password=?";
             stm = connection.prepareStatement(sql);
+            stm.setString(1, account.getName());
+            stm.setString(2, account.getPassword());
             rs = stm.executeQuery();
             while (rs.next()) {
-                return new Account(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getBoolean(4));
+                return new Account(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4));
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    public Account getAccountByName(Account account) {
+        try {
+            String sql = "select a.accountID, a.name, a.password, a.roleID from Account a where a.name = ?";
+            stm = connection.prepareStatement(sql);
+            stm.setString(1, account.getName());
+            rs = stm.executeQuery();
+            while (rs.next()) {
+                return new Account(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4));
             }
         } catch (Exception e) {
         }
@@ -55,7 +71,7 @@ public class AccountDAO extends DBContext {
             stm = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             stm.setString(1, account.getName());
             stm.setString(2, account.getPassword());
-            stm.setBoolean(3, account.isRole());
+            stm.setInt(3, account.getRole());
             return stm.executeUpdate();
         } catch (SQLException e) {
         }

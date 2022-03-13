@@ -21,11 +21,12 @@
                         <section class="vh-100">
                             <div class="row d-flex justify-content-center align-items-center h-100">
                                 <div class="col-xl-4 col-md-6 col-xs-6 offset-xl-1">
-                                    <c:if test="${action eq 'login'}">
+                                    <c:if test="${action eq 'login' or empty action}">
                                         <div class="card">
                                             <div class="card-body">
-                                                <h5 class="card-title text-center">Đăng nhập</h5>
-                                                <form  method="post" action="login?login=true">
+                                                <h4 class="card-title text-center">Đăng nhập</h4>
+                                                <h5 class="card-title text-center">${alert}</h5>
+                                                <form  method="post" action="Login?action=login&login=true">
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1">Tên tài khoản</label>
                                                         <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required="">
@@ -42,7 +43,7 @@
                                                         </div>
                                                     </div>
                                                     <button type="submit" class="btn btn-primary">Đăng nhập</button>
-                                                    <a href="login?action=register" class="btn btn-primary">Đăng ký</a>
+                                                    <a href="Login?action=register" class="btn btn-primary">Đăng ký</a>
                                                 </form>
                                             </div>
                                         </div>
@@ -50,8 +51,9 @@
                                     <c:if test="${action eq 'register'}">
                                         <div class="card">
                                             <div class="card-body">
-                                                <h5 class="card-title text-center">Đăng ký</h5>
-                                                <form method="post" action="login?register=true">
+                                                <h4 class="card-title text-center">Đăng ký</h4>
+                                                <h5 class="card-title text-center">${alert}</h5>
+                                                <form method="post" action="Login?action=register&register=true">
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1">Tên tài khoản</label>
                                                         <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required="">
@@ -66,7 +68,7 @@
                                                         <input type="password" name="re_password" class="form-control" id="exampleInputPassword1" placeholder="Re_Password" required="">
                                                     </div>
                                                     <button type="submit" class="btn btn-primary">Đăng ký</button>
-                                                    <a href="login?action=login" class="btn btn-primary">Đăng nhập</a>
+                                                    <a href="Login?action=login" class="btn btn-primary">Đăng nhập</a>
                                                 </form>
                                             </div>
                                         </div>
